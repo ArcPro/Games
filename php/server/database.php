@@ -30,6 +30,35 @@ class bdd {
         return bdd::$getbdd_;
     }
 
+    public function checkUserExistence($username) {
+        $q = "SELECT * FROM `user` WHERE username = :username";
+        $prep = bdd::$monPdo->prepare($q);
+        $prep->bindValue(':username', $username, PDO::PARAM_STR);
+        $prep->execute();
+        if ($prep->rowCount() > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function getUserInformations($username) {
+        $q = "SELECT uuid, username, email, permission, date FROM `user` WHERE username = :username";
+        $prep = bdd::$monPdo->prepare($q);
+        $prep->bindValue(':username', $username, PDO::PARAM_STR);
+        $prep->execute();
+        $result = $prep->fetch(PDO::FETCH_ASSOC);
+        return new User($result["uuid"], $result["username"], $result["email"], $result["permission"], $result["date"]);
+    }
+
+    public function getUserPassword($username) {
+        $q = "SELECT password FROM `user` WHERE username = :username";
+        $prep = bdd::$monPdo->prepare($q);
+        $prep->bindValue(':username', $username, PDO::PARAM_STR);
+        $prep->execute();
+        $result = $prep->fetch(PDO::FETCH_ASSOC);
+        return $result["password"];
+    }
 //test
 
 public function insert($username, $email, $password, $permission)
@@ -100,6 +129,22 @@ public function insert($username, $email, $password, $permission)
 //     $prep->execute();   
 //     $result=$prep->fetch(PDO::FETCH_ASSOC);}
 
+}
+
+class User {
+    public $uuid;
+    public $username;
+    public $email;
+    public $permission;
+    public $date;
+
+    public function __construct($uuid, $username, $email, $permission, $date) {
+        $this->uuid = $uuid;
+        $this->username = $username;
+        $this->email = $email;
+        $this->permission = $permission;
+        $this->date = $date;
+    }
 }
 
 ?>
