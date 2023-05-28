@@ -32,20 +32,19 @@ class bdd {
 
 //test
 
-public function insert($id, $username, $email, $password, $permission, $date)
+public function insert($username, $email, $password, $permission)
 {
-    $req="INSERT INTO `user`(`uuid`, `username`, `email`, `password`, `permission`, `date`) VALUES (:uuid, :username, :email, :password, :permission, :date)";
-    $prep = bdd ::$monPdo->prepare($req);
-    $prep-> bindValue(':uuid',$id,PDO::PARAM_INT);
-    $prep-> bindValue(':username',$username,PDO::PARAM_STR);
-    $prep-> bindValue(':email',$email,PDO::PARAM_STR);
-    $prep-> bindValue(':password',$password,PDO::PARAM_STR);
-    $prep-> bindValue(':permission',$permission, PDO::PARAM_STR);
-    $prep-> bindValue(':date',$date, PDO::PARAM_STR); //------- ? VERIF ? 
-
+    $req = "INSERT INTO `user` (`username`, `email`, `password`, `permission`, `date`) VALUES (:username, :email, :password, :permission, NOW())";
+    $prep = bdd::$monPdo->prepare($req);
+    $prep->bindValue(':username', $username, PDO::PARAM_STR);
+    $prep->bindValue(':email', $email, PDO::PARAM_STR);
+    $prep->bindValue(':password', $password, PDO::PARAM_STR);
+    $prep->bindValue(':permission', $permission, PDO::PARAM_STR);
     $prep->execute();
-    $result=$prep->fetch(PDO::FETCH_ASSOC);
 }
+
+
+
 
 // // --------------------------- C R E A T E -------------------------//
 // public function create($classe, $annee, $nom, $prenom, $nbstage) {
