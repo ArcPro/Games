@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : dim. 28 mai 2023 à 02:07
+-- Généré le : lun. 29 mai 2023 à 04:14
 -- Version du serveur : 10.4.27-MariaDB
 -- Version de PHP : 8.0.25
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données : `games_project`
+-- Base de données : `games`
 --
 
 -- --------------------------------------------------------
@@ -31,10 +31,29 @@ CREATE TABLE `user` (
   `uuid` varchar(80) NOT NULL,
   `username` varchar(30) NOT NULL,
   `email` varchar(50) NOT NULL,
-  `password` varchar(24) NOT NULL,
-  `permission` int(2) NOT NULL,
-  `date` date NOT NULL DEFAULT current_timestamp()
+  `password` varchar(80) NOT NULL,
+  `permission` int(2) NOT NULL DEFAULT 0,
+  `avatar` varchar(100) DEFAULT NULL,
+  `date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `user`
+--
+
+INSERT INTO `user` (`uuid`, `username`, `email`, `password`, `permission`, `avatar`, `date`) VALUES
+('', 'dfza', 'dazd', 'zadza', 0, NULL, '2023-05-28'),
+('c896f43e-e4e6-4eb0-871b-9e893ff0291a', 'ArcPro', 'admin@admin.com', '$2y$10$4zZ4BeMyZaxEM7AjUCtete8.4xwRBnHsGgxnqsvmLEbBquCYMBKU6', 1, NULL, '2023-05-02');
+
+--
+-- Index pour les tables déchargées
+--
+
+--
+-- Index pour la table `user`
+--
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`uuid`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
