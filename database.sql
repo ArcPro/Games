@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : lun. 29 mai 2023 à 04:14
+-- Généré le : mar. 30 mai 2023 à 00:30
 -- Version du serveur : 10.4.27-MariaDB
 -- Version de PHP : 8.0.25
 
@@ -20,6 +20,36 @@ SET time_zone = "+00:00";
 --
 -- Base de données : `games`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `comment`
+--
+
+CREATE TABLE `comment` (
+  `id` int(11) NOT NULL,
+  `userUuid` varchar(40) NOT NULL,
+  `profileUuid` varchar(40) NOT NULL,
+  `message` varchar(255) NOT NULL,
+  `visibility` int(11) NOT NULL DEFAULT 0,
+  `date` date NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `duel`
+--
+
+CREATE TABLE `duel` (
+  `uuid` varchar(40) NOT NULL,
+  `user1Uuid` varchar(40) NOT NULL,
+  `user2Uuid` varchar(40) NOT NULL,
+  `duelStatus` int(11) NOT NULL DEFAULT 0,
+  `winnerUuid` varchar(40) NOT NULL DEFAULT current_timestamp(),
+  `date` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -50,10 +80,32 @@ INSERT INTO `user` (`uuid`, `username`, `email`, `password`, `permission`, `avat
 --
 
 --
+-- Index pour la table `comment`
+--
+ALTER TABLE `comment`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `duel`
+--
+ALTER TABLE `duel`
+  ADD PRIMARY KEY (`uuid`);
+
+--
 -- Index pour la table `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`uuid`);
+
+--
+-- AUTO_INCREMENT pour les tables déchargées
+--
+
+--
+-- AUTO_INCREMENT pour la table `comment`
+--
+ALTER TABLE `comment`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

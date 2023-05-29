@@ -10,3 +10,10 @@ function format_uuidv4($data)
     
   return vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex($data), 4));
 }
+
+function getRank($rank) {
+ if ($rank == 0) {return '<p class="badge badge-secondary">Membre</p>';}
+ else if ($rank == 1) { return '<span class="badge badge-warning" style="color:white;">Contributeur</span>';}
+ else if ($rank == 2) { return '<span class="badge badge-success">Modérateur</span>';}
+ else if ($rank == 3) { return '<span class="badge badge-danger">Administrateur</span>';}
+}
