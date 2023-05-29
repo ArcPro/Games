@@ -1,4 +1,5 @@
 
+
 <?php
 
 //classe static = pas instanciation 
@@ -30,6 +31,7 @@ class bdd {
         return bdd::$getbdd_;
     }
 
+    // LOGIN SYSTEM
     public function checkUserExistence($username) {
         $q = "SELECT * FROM `user` WHERE username = :username";
         $prep = bdd::$monPdo->prepare($q);
@@ -148,4 +150,3 @@ class User {
 }
 
 ?>
-
