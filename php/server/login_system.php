@@ -5,7 +5,7 @@ $pdo=bdd::getBdd();
 // Login du compte
 if (isset($_POST["login"]))
 {
-    $username = htmlspecialchars($_POST["username"]);
+    $username = htmlspecialchars($_POST["pseudo"]);
     $password = htmlspecialchars($_POST["password"]);
     loginUser($username, $password, $pdo);
 }
@@ -39,6 +39,14 @@ function loginUser($username, $password) {
             $_SESSION["permission"] = $user->permission;
             $_SESSION["date"] = $user->date;
         } else {
+            echo '<script>
+            window.addEventListener("load", function () {
+                showLogin()
+                const divElement = document.getElementById("exampleInputPassword1");
+                divElement.classList.remove("form-control");
+                divElement.classList.add("form-control", "is-invalid");                
+              })
+              </script>'; // 
             // Informations incorrectes
         }
     } else {

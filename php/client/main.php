@@ -125,7 +125,7 @@ body {
         <a class="nav-link" href="#">Features</a>
         <a class="nav-link" href="#">Contact</a>
         <?php
-       echo (isLogged()) ? $_SESSION["uuid"] : /*if condition is false*/ '<img src="image/user-plus.png" style="width:35px;height:35px;margin-left:20px;" onclick="showLogin()">' ;
+       echo (isLogged()) ? '<a href="#"><img src="image/avatar/default.png" style="width:35px;height:35px;margin-left:20px;"></a>' : /*if condition is false*/ '<a href=""><img src="image/user-plus.png" style="width:35px;height:35px;margin-left:20px;" onclick="showLogin()"></a>' ;
        ?>        
         
       </nav>

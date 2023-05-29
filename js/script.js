@@ -9,120 +9,121 @@ function showLogin() {
 
     const mainElement = document.getElementById('main');
 
-const modalDialogElement = document.createElement('div');
-modalDialogElement.classList.add('modal-dialog');
-modalDialogElement.setAttribute('role', 'document');
-modalDialogElement.style.width = '500px';
-modalDialogElement.style.height = '500px';
+    const modalDialogElement = document.createElement('div');
+    modalDialogElement.classList.add('modal-dialog');
+    modalDialogElement.setAttribute('role', 'document');
+    modalDialogElement.style.width = '500px';
+    modalDialogElement.style.height = '500px';
 
-const modalContentElement = document.createElement('div');
-modalContentElement.classList.add('modal-content');
-modalContentElement.style.color = 'black';
-modalContentElement.style.height = '400px';
+    const modalContentElement = document.createElement('div');
+    modalContentElement.classList.add('modal-content');
+    modalContentElement.style.color = 'black';
+    modalContentElement.style.height = '400px';
 
-const formElement = document.createElement('form');
-formElement.setAttribute('method', 'post');
+    const formElement = document.createElement('form');
+    formElement.setAttribute('method', 'post');
 
-const modalHeaderElement = document.createElement('div');
-modalHeaderElement.classList.add('modal-header');
+    const modalHeaderElement = document.createElement('div');
+    modalHeaderElement.classList.add('modal-header');
 
-const modalTitleElement = document.createElement('h5');
-modalTitleElement.classList.add('modal-title');
-modalTitleElement.textContent = 'Connexion';
+    const modalTitleElement = document.createElement('h5');
+    modalTitleElement.classList.add('modal-title');
+    modalTitleElement.textContent = 'Connexion';
 
-const closeButtonElement = document.createElement('button');
-closeButtonElement.setAttribute('type', 'button');
-closeButtonElement.classList.add('close');
-closeButtonElement.setAttribute('data-dismiss', 'modal');
-closeButtonElement.setAttribute('aria-label', 'Close');
+    const closeButtonElement = document.createElement('button');
+    closeButtonElement.setAttribute('type', 'button');
+    closeButtonElement.classList.add('close');
+    closeButtonElement.setAttribute('data-dismiss', 'modal');
+    closeButtonElement.setAttribute('aria-label', 'Close');
 
-const closeSpanElement = document.createElement('span');
-closeSpanElement.setAttribute('aria-hidden', 'true');
-closeSpanElement.textContent = '×';
-closeSpanElement.addEventListener('click', closeForm);
-
-
-closeButtonElement.appendChild(closeSpanElement);
-modalHeaderElement.appendChild(modalTitleElement);
-modalHeaderElement.appendChild(closeButtonElement);
-
-const modalBodyElement = document.createElement('div');
-modalBodyElement.classList.add('modal-body');
-
-const formGroup1Element = document.createElement('div');
-formGroup1Element.classList.add('form-group');
-
-const pseudonymeLabelElement = document.createElement('label');
-pseudonymeLabelElement.classList.add('col-form-label');
-pseudonymeLabelElement.textContent = 'Pseudonyme';
-
-const pseudonymeInputElement = document.createElement('input');
-pseudonymeInputElement.setAttribute('type', 'text');
-pseudonymeInputElement.classList.add('form-control');
-pseudonymeInputElement.setAttribute('placeholder', 'Pseudo');
-pseudonymeInputElement.setAttribute('name', 'pseudo');
-pseudonymeInputElement.setAttribute('required', 'required');
-
-formGroup1Element.appendChild(pseudonymeLabelElement);
-formGroup1Element.appendChild(pseudonymeInputElement);
-
-const formGroup2Element = document.createElement('div');
-formGroup2Element.classList.add('form-group');
-
-const passwordLabelElement = document.createElement('label');
-passwordLabelElement.textContent = 'Password';
-
-const passwordInputElement = document.createElement('input');
-passwordInputElement.setAttribute('type', 'password');
-passwordInputElement.classList.add('form-control');
-passwordInputElement.setAttribute('id', 'exampleInputPassword1');
-passwordInputElement.setAttribute('placeholder', 'Password');
-passwordInputElement.setAttribute('name', 'password');
-passwordInputElement.setAttribute('required', 'required');
-
-formGroup2Element.appendChild(passwordLabelElement);
-formGroup2Element.appendChild(passwordInputElement);
-
-const forgotPasswordLinkElement = document.createElement('a');
-forgotPasswordLinkElement.style.color = 'blue';
-forgotPasswordLinkElement.style.fontSize = '13px';
-forgotPasswordLinkElement.style.marginLeft = '5px';
-forgotPasswordLinkElement.setAttribute('href', '#');
-forgotPasswordLinkElement.textContent = 'Mot de passe oublié';
-
-modalBodyElement.appendChild(formGroup1Element);
-modalBodyElement.appendChild(formGroup2Element);
-modalBodyElement.appendChild(forgotPasswordLinkElement);
-
-const modalFooterElement = document.createElement('div');
-modalFooterElement.classList.add('modal-footer');
-
-const createAccButtonElement = document.createElement('button');
-createAccButtonElement.setAttribute('type', 'button');
-createAccButtonElement.classList.add('btn', 'btn-success');
-createAccButtonElement.setAttribute('id', 'createAcc');
-createAccButtonElement.textContent = 'Créer un compte';
-createAccButtonElement.addEventListener('click', showRegister);
+    const closeSpanElement = document.createElement('span');
+    closeSpanElement.setAttribute('aria-hidden', 'true');
+    closeSpanElement.textContent = '×';
+    closeSpanElement.addEventListener('click', closeForm);
 
 
-const loginButtonElement = document.createElement('input');
-loginButtonElement.setAttribute('type', 'submit');
-loginButtonElement.classList.add('btn', 'btn-primary');
-loginButtonElement.setAttribute('value', 'Se connecter');
-loginButtonElement.setAttribute('name', 'login');
+    closeButtonElement.appendChild(closeSpanElement);
+    modalHeaderElement.appendChild(modalTitleElement);
+    modalHeaderElement.appendChild(closeButtonElement);
 
-modalFooterElement.appendChild(createAccButtonElement);
-modalFooterElement.appendChild(loginButtonElement);
+    const modalBodyElement = document.createElement('div');
+    modalBodyElement.classList.add('modal-body');
 
-formElement.appendChild(modalHeaderElement);
-formElement.appendChild(modalBodyElement);
-formElement.appendChild(modalFooterElement);
+    const formGroup1Element = document.createElement('div');
+    formGroup1Element.classList.add('form-group');
+    formGroup1Element.setAttribute('id', 'formGroup1Element');
 
-modalContentElement.appendChild(formElement);
+    const pseudonymeLabelElement = document.createElement('label');
+    pseudonymeLabelElement.classList.add('col-form-label');
+    pseudonymeLabelElement.textContent = 'Pseudonyme';
 
-modalDialogElement.appendChild(modalContentElement);
+    const pseudonymeInputElement = document.createElement('input');
+    pseudonymeInputElement.setAttribute('type', 'text');
+    pseudonymeInputElement.classList.add('form-control');
+    pseudonymeInputElement.setAttribute('placeholder', 'Pseudo');
+    pseudonymeInputElement.setAttribute('name', 'pseudo');
+    pseudonymeInputElement.setAttribute('required', 'required');
 
-mainElement.appendChild(modalDialogElement);
+    formGroup1Element.appendChild(pseudonymeLabelElement);
+    formGroup1Element.appendChild(pseudonymeInputElement);
+
+    const formGroup2Element = document.createElement('div');
+    formGroup2Element.classList.add('form-group');
+
+    const passwordLabelElement = document.createElement('label');
+    passwordLabelElement.textContent = 'Password';
+
+    const passwordInputElement = document.createElement('input');
+    passwordInputElement.setAttribute('type', 'password');
+    passwordInputElement.classList.add('form-control');
+    passwordInputElement.setAttribute('id', 'exampleInputPassword1');
+    passwordInputElement.setAttribute('placeholder', 'Password');
+    passwordInputElement.setAttribute('name', 'password');
+    passwordInputElement.setAttribute('required', 'required');
+
+    formGroup2Element.appendChild(passwordLabelElement);
+    formGroup2Element.appendChild(passwordInputElement);
+
+    const forgotPasswordLinkElement = document.createElement('a');
+    forgotPasswordLinkElement.style.color = 'blue';
+    forgotPasswordLinkElement.style.fontSize = '13px';
+    forgotPasswordLinkElement.style.marginLeft = '5px';
+    forgotPasswordLinkElement.setAttribute('href', '#');
+    forgotPasswordLinkElement.textContent = 'Mot de passe oublié';
+
+    modalBodyElement.appendChild(formGroup1Element);
+    modalBodyElement.appendChild(formGroup2Element);
+    modalBodyElement.appendChild(forgotPasswordLinkElement);
+
+    const modalFooterElement = document.createElement('div');
+    modalFooterElement.classList.add('modal-footer');
+
+    const createAccButtonElement = document.createElement('button');
+    createAccButtonElement.setAttribute('type', 'button');
+    createAccButtonElement.classList.add('btn', 'btn-success');
+    createAccButtonElement.setAttribute('id', 'createAcc');
+    createAccButtonElement.textContent = 'Créer un compte';
+    createAccButtonElement.addEventListener('click', showRegister);
+
+
+    const loginButtonElement = document.createElement('input');
+    loginButtonElement.setAttribute('type', 'submit');
+    loginButtonElement.classList.add('btn', 'btn-primary');
+    loginButtonElement.setAttribute('value', 'Se connecter');
+    loginButtonElement.setAttribute('name', 'login');
+
+    modalFooterElement.appendChild(createAccButtonElement);
+    modalFooterElement.appendChild(loginButtonElement);
+
+    formElement.appendChild(modalHeaderElement);
+    formElement.appendChild(modalBodyElement);
+    formElement.appendChild(modalFooterElement);
+
+    modalContentElement.appendChild(formElement);
+
+    modalDialogElement.appendChild(modalContentElement);
+
+    mainElement.appendChild(modalDialogElement);
 
 
     // Ajouter le "main" au corps du document
