@@ -116,16 +116,16 @@ body {
   color: rgba(255, 255, 255, .5);
 }
 </style>
-<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+<div class="d-flex w-100 h-100 p-3 mx-auto flex-column" style="max-width: 55em;">
   <header class="masthead mb-auto">
     <div class="inner">
       <h3 class="masthead-brand">Cover</h3>
       <nav class="nav nav-masthead justify-content-center">
-        <a class="nav-link active" href="#">Home</a>
-        <a class="nav-link" href="#">Features</a>
-        <a class="nav-link" href="#">Contact</a>
+        <a class="nav-link active" href="#" id="nav-one">Home</a>
+        <a class="nav-link" href="#" id="nav-two">Features</a>
+        <a class="nav-link" href="#" id="nav-three">Contact</a>
         <?php
-       echo (isLogged()) ? '<a href="#"><img src="image/avatar/default.png" style="width:35px;height:35px;margin-left:20px;"></a>' : /*if condition is false*/ '<a href=""><img src="image/user-plus.png" style="width:35px;height:35px;margin-left:20px;" onclick="showLogin()"></a>' ;
+       echo (isLogged()) ? '<a href="#"><img src="image/avatar/default.png" style="width:35px;height:35px;margin-left:20px;" onclick="showProfile(\'' . $_SESSION["username"] . '\')" id="profile-main-picture"></a>' : /*if condition is false*/ '<a href=""><img src="image/user-plus.png" style="width:35px;height:35px;margin-left:20px;" onclick="showLogin()"></a>' ;
        ?>        
         
       </nav>
@@ -212,7 +212,7 @@ body {
 
   <footer class="mastfoot mt-auto">
     <div class="inner">
-      <p>Cover template for <a href="https://getbootstrap.com/">Bootstrap</a>, by <a href="https://twitter.com/mdo">@mdo</a>.</p>
+      <p>© 2023 <a href="http://localhost/ArcPro/Games/index.php">Chess</a>. Tous droits réservés. Proposé par <a href="">@XXX</a>.</p>
     </div>
   </footer>
 </div>

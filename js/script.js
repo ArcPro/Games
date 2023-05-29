@@ -1,4 +1,5 @@
 // Login form
+var inProfile = false;
 
 function clearMain() {
     document.getElementById('main').innerHTML = ''
@@ -48,6 +49,7 @@ function showLogin() {
 
     const modalBodyElement = document.createElement('div');
     modalBodyElement.classList.add('modal-body');
+    modalBodyElement.setAttribute('id', 'modal-body');
 
     const formGroup1Element = document.createElement('div');
     formGroup1Element.classList.add('form-group');
@@ -69,6 +71,7 @@ function showLogin() {
 
     const formGroup2Element = document.createElement('div');
     formGroup2Element.classList.add('form-group');
+    formGroup2Element.setAttribute('id', 'password');
 
     const passwordLabelElement = document.createElement('label');
     passwordLabelElement.textContent = 'Password';
@@ -169,6 +172,7 @@ function showRegister() {
 
     const modalBodyElement = document.createElement('div');
     modalBodyElement.classList.add('modal-body');
+    modalBodyElement.setAttribute('id', 'modal-body');
 
     const formGroup1Element = document.createElement('div');
     formGroup1Element.classList.add('form-group');
@@ -276,7 +280,39 @@ function showRegister() {
     mainElement.appendChild(modalDialogElement);
 }
 
-
 function closeForm() {
     clearMain()
+}
+
+
+// $(document).ready(function(){
+//     $("#profile-main-picture").click(function(){
+//         $.ajax({
+//             url: "../Games/php/client/profile.php", // Chemin vers votre fichier PHP à inclure
+//             dataType: "html",
+//             success: function(response){
+                
+
+//                 // navOne.classList.add("nav-link");
+//                 $("#main").html(response); // Insère le contenu dans l'élément avec l'ID "contenuInclus"
+//                 history.pushState(null, null, "/profile"); // Modifie l'URL en "/profile" sans recharger la page
+//             }
+//         });
+//     });
+// });
+
+function showProfile(name) {
+    if (inProfile == false) {
+        $.ajax({
+            url: "../Games/php/client/profile.php",
+            dataType: "html",
+            data: { username: name }, // Variable à envoyer au script PHP
+            success: function(response) {
+                $("#main").html(response);
+                // history.pushState(null, null, "/profile/"+name); // Modifie l'URL en "/profile" sans recharger la page
+            }
+        });
+        inProfile = true;
+    }
+    
 }

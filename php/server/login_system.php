@@ -44,7 +44,14 @@ function loginUser($username, $password) {
                 showLogin()
                 const divElement = document.getElementById("exampleInputPassword1");
                 divElement.classList.remove("form-control");
-                divElement.classList.add("form-control", "is-invalid");                
+                divElement.classList.add("form-control", "is-invalid");
+
+                const passwordDiv = document.getElementById("password");
+                const divInvalidFeedback = document.createElement("div");
+                divInvalidFeedback.className = "invalid-feedback";
+                divInvalidFeedback.innerHTML = "Désolé, les informations ne correspondent pas.";
+                passwordDiv.appendChild(divInvalidFeedback);
+
               })
               </script>'; // 
             // Informations incorrectes

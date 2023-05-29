@@ -1,7 +1,7 @@
 <?php
 
 session_start();
-session_unset();
+// session_unset();
 
 include_once "php/server/database.php";
 include_once "php/client/header.php";
