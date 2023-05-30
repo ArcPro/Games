@@ -28,9 +28,7 @@ class bdd {
         return bdd::$getbdd_;
     }
 
-
-
-//---REQUETES---//
+//------REQUETES------//
 
 //CHECK IF USER EXISTS//
     public function checkUserExistence($username) {
@@ -56,7 +54,7 @@ class bdd {
     }
 
 //GET USER PASSWORD//
-    public function getUserPassword($username) {
+    public function getUserPassword($username) {    
         $q = "SELECT password FROM `user` WHERE username = :username";
         $prep = bdd::$monPdo->prepare($q);
         $prep->bindValue(':username', $username, PDO::PARAM_STR);
@@ -76,6 +74,36 @@ public function createUser($uuid, $username, $email, $password)
     $prep->bindValue(':password', $password, PDO::PARAM_STR);
     $prep->execute();
 }
+
+
+//GET COMMENT BY ID//
+public function getCommentsByID($uuid)
+{
+    $req = "SELECT user.uuid, comment.message, comment.visibility, comment.date 
+            FROM `comment` 
+            JOIN `user` ON user.uuid=comment.userUuid 
+            WHERE user.uuid = :uuid";
+    $prep = bdd::$monPdo->prepare($req);
+    $prep->bindValue(':uuid', $uuid, PDO::PARAM_STR);
+    $prep->execute();
+    return $prep->fetchAll(PDO::FETCH_ASSOC);
+    
+}
+
+//GET PROFILE
+public function getProfile($uuid) 
+{
+    $user = $this->getUserInformations($uuid);
+    $uuid = $user->uuid;
+    $req = "SELECT uuid, date, nbDuelJoue, nbDuelGagne, rank FROM `profile` WHERE uuid = :uuid";
+    $prep = bdd::$monPdo->prepare($req);
+    $prep->bindValue(':uuid', $uuid, PDO::PARAM_STR);
+    $prep->execute();
+    $result = $prep->fetch(PDO::FETCH_ASSOC);
+    
+    return new Profile($result["uuid"], $result["date"], $result["nbDuelJoue"], $result["nbDuelGagne"], $result["rank"]);
+}
+
 
 
 }
