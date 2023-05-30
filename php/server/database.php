@@ -31,7 +31,8 @@ class bdd {
         return bdd::$getbdd_;
     }
 
-    // LOGIN SYSTEM
+    //----------------- CHECK USER EXISTENCE -------------//
+
     public function checkUserExistence($username) {
         $q = "SELECT * FROM `user` WHERE username = :username";
         $prep = bdd::$monPdo->prepare($q);
@@ -44,6 +45,8 @@ class bdd {
         }
     }
 
+    //----------------- GET USER INFORMATIONS -------------//
+
     public function getUserInformations($username) {
         $q = "SELECT uuid, username, email, permission, date FROM `user` WHERE username = :username";
         $prep = bdd::$monPdo->prepare($q);
@@ -53,6 +56,8 @@ class bdd {
         return new User($result["uuid"], $result["username"], $result["email"], $result["permission"], $result["date"]);
     }
 
+    //----------------- GET USER PASSWORD -------------//
+
     public function getUserPassword($username) {
         $q = "SELECT password FROM `user` WHERE username = :username";
         $prep = bdd::$monPdo->prepare($q);
@@ -61,16 +66,16 @@ class bdd {
         $result = $prep->fetch(PDO::FETCH_ASSOC);
         return $result["password"];
     }
-//test
 
-public function insert($username, $email, $password, $permission)
+//-------------- REGISTER USER -------------//
+
+public function createUser($username, $email, $password)
 {
-    $req = "INSERT INTO `user` (`username`, `email`, `password`, `permission`, `date`) VALUES (:username, :email, :password, :permission, NOW())";
+    $req = "INSERT INTO `user` (`username`, `email`, `password`) VALUES (:username, :email, :password)";
     $prep = bdd::$monPdo->prepare($req);
     $prep->bindValue(':username', $username, PDO::PARAM_STR);
     $prep->bindValue(':email', $email, PDO::PARAM_STR);
     $prep->bindValue(':password', $password, PDO::PARAM_STR);
-    $prep->bindValue(':permission', $permission, PDO::PARAM_STR);
     $prep->execute();
 }
 
