@@ -304,7 +304,7 @@ function closeForm() {
 function showProfile(name) {
     if (inProfile == false) {
         $.ajax({
-            url: "../Games/php/client/profile.php",
+            url: "../chess/php/client/profile.php",
             dataType: "html",
             data: { username: name }, // Variable à envoyer au script PHP
             success: function(response) {

@@ -10,6 +10,15 @@ if (isset($_POST["login"]))
     loginUser($username, $password, $pdo);
 }
 
+if (isset($_POST["Enregistrer"]))
+{
+            
+    $username=trim($_POST["username"]);
+    $email=trim($_POST["email"]);
+    $password=trim($_POST["password"]);
+    $pdo->createUser($username, $email, $password);
+}
+
 
 function isLogged() {
     if (isset($_SESSION["uuid"])) {
@@ -62,12 +71,21 @@ function loginUser($username, $password) {
 }
 
 function registerUser($username, $password, $email) {
-    if (!checkUser($username)) {
-        // Enregistrer l'utilisateur
-        $hash = password_hash($password, PASSWORD_BCRYPT);
+    global $pdo;
 
-    } else {
-        // Mettre sur la page de login
+
+    if (!checkUser($username)) {
+        $hash = password_hash($password, PASSWORD_BCRYPT);
+        $pdo->createUser($username, $email, $hash);
+        
+        //controles mdp 
+            //Affichage message succès
+        echo '<div class="alert alert-success">
+        <p>Utilisateur ajouté avec succès</p>
+            <p> 
+                <a href="index.php" class="btn btn-secondary">OK</a>
+            </p>
+        </div>';
     }
 }
 
