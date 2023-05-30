@@ -2,12 +2,22 @@
 
 $pdo=bdd::getBdd();
 
-// Login du compte
+//----LOGIN-----//
 if (isset($_POST["login"]))
 {
     $username = htmlspecialchars($_POST["pseudo"]);
     $password = htmlspecialchars($_POST["password"]);
-    loginUser($username, $password, $pdo);
+    loginUser($username, $password);
+}
+
+//----REGISTER-----//
+if (isset($_POST["Enregistrer"]))
+{
+            
+    $username=trim($_POST["username"]);
+    $email=trim($_POST["email"]);
+    $password=trim($_POST["password"]);
+    $pdo->createUser($username, $email, $password);
 }
 
 if (isset($_POST["Enregistrer"]))
@@ -70,9 +80,16 @@ function loginUser($username, $password) {
     }
 }
 
+<<<<<<< HEAD
 function registerUser($username, $password, $email) {
     global $pdo;
 
+=======
+
+function registerUser($username, $password, $email) {
+    global $pdo;
+
+>>>>>>> 8a0748f7e01d878cd8d5ba90718add442a9be2d3
 
     if (!checkUser($username)) {
         $hash = password_hash($password, PASSWORD_BCRYPT);
@@ -80,14 +97,27 @@ function registerUser($username, $password, $email) {
         
         //controles mdp 
             //Affichage message succès
+<<<<<<< HEAD
         echo '<div class="alert alert-success">
         <p>Utilisateur ajouté avec succès</p>
             <p> 
                 <a href="index.php" class="btn btn-secondary">OK</a>
             </p>
         </div>';
+=======
+            echo '<div class="alert alert-success">
+
+            <p>Utilisateur ajouté avec succès</p>
+                <p> 
+                    <a href="index.php" class="btn btn-secondary">OK</a>
+                </p>
+            </div>';
+        
+               
+        }
+>>>>>>> 8a0748f7e01d878cd8d5ba90718add442a9be2d3
     }
-}
+
 
 
 ?>
