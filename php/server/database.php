@@ -2,6 +2,7 @@
 
 <?php
 
+include_once "models.php";
 //---------- DATA ACCESS LAYER ----------//
 
 //---CONNEXION BDD---//
@@ -67,9 +68,9 @@ class bdd {
 //CREATE USER// 
 public function createUser($uuid, $username, $email, $password)
 {
-    $req = "INSERT INTO `user` (`uuid`, username`, `email`, `password`) VALUES (:username, :email, :password)";
+    $req = "INSERT INTO `user` (`uuid`, `username`, `email`, `password`) VALUES (:uuid, :username, :email, :password)";
     $prep = bdd::$monPdo->prepare($req);
-    $prep->bindValue(':uuid', $uuid, PDO::PARAM_INT);
+    $prep->bindValue(':uuid', $uuid, PDO::PARAM_STR);
     $prep->bindValue(':username', $username, PDO::PARAM_STR);
     $prep->bindValue(':email', $email, PDO::PARAM_STR);
     $prep->bindValue(':password', $password, PDO::PARAM_STR);
