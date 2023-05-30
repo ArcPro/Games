@@ -26,6 +26,17 @@ include_once "../server/utils.php";
         });
     }
 
+    function editProfile(name) {
+        $.ajax({
+            url: "php/client/edit_profile.php",
+            dataType: "html",
+            data: { username: name }, // Variable à envoyer au script PHP
+            success: function(response) {
+                $("#comments-stats").html(response);
+                // history.pushState(null, null, "/profile/"+name); // Modifie l'URL en "/profile" sans recharger la page
+            }
+        });
+    }
 
 </script>
 
@@ -103,7 +114,7 @@ include_once "../server/utils.php";
         </div>
 
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-        <?php if ($_GET['username'] == $_SESSION['username']){echo '<span aria-hidden="true" style="font-size:13px;">Modifier</span>';} ?>
+        <?php if ($_GET['username'] == $_SESSION['username']){echo '<span aria-hidden="true" style="font-size:13px;" onclick="editProfile()">Modifier</span>';} ?>
         </button>
     </div>
   </div>
