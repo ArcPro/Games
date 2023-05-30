@@ -65,10 +65,11 @@ class bdd {
     }
 
 //CREATE USER// 
-public function createUser($username, $email, $password)
+public function createUser($uuid, $username, $email, $password)
 {
-    $req = "INSERT INTO `user` (`username`, `email`, `password`) VALUES (:username, :email, :password)";
+    $req = "INSERT INTO `user` (`uuid`, username`, `email`, `password`) VALUES (:username, :email, :password)";
     $prep = bdd::$monPdo->prepare($req);
+    $prep->bindValue(':uuid', $uuid, PDO::PARAM_INT);
     $prep->bindValue(':username', $username, PDO::PARAM_STR);
     $prep->bindValue(':email', $email, PDO::PARAM_STR);
     $prep->bindValue(':password', $password, PDO::PARAM_STR);
