@@ -125,7 +125,7 @@ body {
         <a class="nav-link" href="#" id="nav-two">Features</a>
         <a class="nav-link" href="#" id="nav-three">Contact</a>
         <?php
-       echo (isLogged()) ? '<a href="#"><img src="image/avatar/default.png" style="width:35px;height:35px;margin-left:20px;" onclick="showProfile(\'' . $_SESSION["username"] . '\')" id="profile-main-picture"></a>' : /*if condition is false*/ '<a href=""><img src="image/user-plus.png" style="width:35px;height:35px;margin-left:20px;" onclick="showLogin()"></a>' ;
+       echo (isLogged()) ? '<a href="#"><img src="image/avatar/default.png" style="width:35px;height:35px;margin-left:20px;border-radius:50px;" onclick="showProfile(\'' . $_SESSION["username"] . '\')" id="profile-main-picture"></a>' : /*if condition is false*/ '<a href=""><img src="image/user-plus.png" style="width:35px;height:35px;margin-left:20px;" onclick="showLogin()"></a>' ;
        ?>        
         
       </nav>

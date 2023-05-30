@@ -12,6 +12,21 @@ include_once "../server/utils.php";
     var profileImage = document.getElementById("profile-main-picture");
     profileImage.style.border = "2px solid white";
     profileImage.style.borderRadius = "50%";
+
+    function showFriendslist(name) {
+        console.log('test')
+        $.ajax({
+            url: "php/client/friends.php",
+            dataType: "html",
+            data: { username: name }, // Variable à envoyer au script PHP
+            success: function(response) {
+                $("#comments-stats").html(response);
+                // history.pushState(null, null, "/profile/"+name); // Modifie l'URL en "/profile" sans recharger la page
+            }
+        });
+    }
+
+
 </script>
 
 <style>
@@ -50,6 +65,10 @@ include_once "../server/utils.php";
     ::-webkit-scrollbar-thumb:hover {
     background: #004c9d; 
     }
+
+    #friends {
+        cursor: pointer;
+    }
 </style>
 
 <div class="modal-dialog" role="document" style="max-width: 700px;">
@@ -67,8 +86,8 @@ include_once "../server/utils.php";
                     <img src="image/calendar.png" alt="Date d'inscription" title="Date d'inscription" style="width:45px;height:45px;">
                     <p style="margin-top:5px;">29 mai 2023</p>
                 </div>
-                <div class="card-body" style="text-align:center;">
-                    <img src="image/friends.png" alt="Amis" title="Amis" style="width:45px;height:45px;">
+                <div class="card-body" style="text-align:center;" onclick="showFriendslist('<?php echo $_GET['username'];?>')">
+                    <img src="image/friends.png" alt="Amis" title="Amis" style="width:45px;height:45px;" id="friends">
                     <p style="margin-top:5px;">5</p>
                 </div>
                 <div class="card-body" style="text-align:center;">
@@ -92,7 +111,7 @@ include_once "../server/utils.php";
 
 <div class="modal-dialog" role="document" style="max-width: 700px;">
 
-    <div class="modal-content" style="color:black; border-radius:10px; height:350px;">
+    <div class="modal-content" style="color:black; border-radius:10px; height:350px;" id="comments-stats">
         <div class="modal-header" style="border-bottom:none;">
             <div class="bs-component">
                 <ul class="nav nav-tabs">
@@ -113,7 +132,7 @@ include_once "../server/utils.php";
                     </div>
                     <div class="tab-pane fade" id="comments" style="width:110%;">
                         <form method="post" style="display:flex;">
-                            <img src="image/avatar/default.png" style="width:50px;height:50px;">
+                            <img src="image/avatar/default.png" style="width:50px;height:50px;border-radius:5px;">
 
                             <input type="text" name="comment" class="form-control" placeholder="Commentez le profil de XXX" style="margin-left:7px;margin-top:5px;">
                             <button type="submit" class="btn btn-primary" style="margin-left:10px;height:40px;margin-top:5px;">Publier</button>
@@ -121,7 +140,7 @@ include_once "../server/utils.php";
                         <div class="chatdiv">
                             <div class="chatrow">
                                 <div class="chatbox">
-                                    <img src="image/avatar/default.png" style="width:50px;height:50px;">
+                                    <img src="image/avatar/default.png" style="width:50px;height:50px;border-radius:5px;">
                                     <div class="card-body" style="margin-top:-20px;">
                                         <a>ArcPro</a>
                                         <p>Commentaire en question qui est censé pas etre trop long</p>
@@ -131,7 +150,7 @@ include_once "../server/utils.php";
                             </div>
                             <div class="chatrow">
                                 <div class="chatbox">
-                                    <img src="image/avatar/default.png" style="width:50px;height:50px;">
+                                    <img src="image/avatar/default.png" style="width:50px;height:50px;border-radius:5px;">
                                     <div class="card-body" style="margin-top:-20px;">
                                         <a>ArcPro</a>
                                         <p>Commentaire en question qui est censé pas etre trop long</p>
@@ -141,7 +160,7 @@ include_once "../server/utils.php";
                             </div>
                             <div class="chatrow">
                                 <div class="chatbox">
-                                    <img src="image/avatar/default.png" style="width:50px;height:50px;">
+                                    <img src="image/avatar/default.png" style="width:50px;height:50px;border-radius:5px;">
                                     <div class="card-body" style="margin-top:-20px;">
                                         <a>ArcPro</a>
                                         <p>Commentaire en question qui est censé pas etre trop long</p>
@@ -151,7 +170,7 @@ include_once "../server/utils.php";
                             </div>
                             <div class="chatrow">
                                 <div class="chatbox">
-                                    <img src="image/avatar/default.png" style="width:50px;height:50px;">
+                                    <img src="image/avatar/default.png" style="width:50px;height:50px;border-radius:5px;">
                                     <div class="card-body" style="margin-top:-20px;">
                                         <a>ArcPro</a>
                                         <p>Commentaire en question qui est censé pas etre trop long</p>
@@ -167,4 +186,3 @@ include_once "../server/utils.php";
         </div>
     </div>
 </div>
-<p>TEST</p>
