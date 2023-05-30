@@ -148,6 +148,9 @@ function showRegister() {
     modalContentElement.style.color = 'black';
     modalContentElement.style.height = '550px';
 
+    const formElement = document.createElement('form');
+    formElement.setAttribute('method', 'post');
+
     const modalHeaderElement = document.createElement('div');
     modalHeaderElement.classList.add('modal-header');
 
@@ -225,7 +228,8 @@ function showRegister() {
     const passwordInputElement = document.createElement('input');
     passwordInputElement.setAttribute('type', 'password');
     passwordInputElement.classList.add('form-control');
-    passwordInputElement.setAttribute('id', 'exampleInputPassword1');
+    passwordInputElement.setAttribute('id', 'password');
+    passwordInputElement.setAttribute('name', 'password');
     passwordInputElement.setAttribute('placeholder', 'Mot de passe');
     passwordInputElement.setAttribute('required', 'required');
 
@@ -241,17 +245,18 @@ function showRegister() {
     const confirmationInputElement = document.createElement('input');
     confirmationInputElement.setAttribute('type', 'password');
     confirmationInputElement.classList.add('form-control');
-    confirmationInputElement.setAttribute('id', 'exampleInputPassword1');
+    confirmationInputElement.setAttribute('id', 'confirmpassword');
+    confirmationInputElement.setAttribute('name', 'confirmPassword');
     confirmationInputElement.setAttribute('placeholder', 'Confirmez le mot de passe');
     confirmationInputElement.setAttribute('required', 'required');
 
     formGroup4Element.appendChild(confirmationLabelElement);
     formGroup4Element.appendChild(confirmationInputElement);
 
-    modalBodyElement.appendChild(formGroup1Element);
-    modalBodyElement.appendChild(formGroup2Element);
-    modalBodyElement.appendChild(formGroup3Element);
-    modalBodyElement.appendChild(formGroup4Element);
+    formElement.appendChild(formGroup1Element);
+    formElement.appendChild(formGroup2Element);
+    formElement.appendChild(formGroup3Element);
+    formElement.appendChild(formGroup4Element);
 
     const modalFooterElement = document.createElement('div');
     modalFooterElement.classList.add('modal-footer');
@@ -278,6 +283,8 @@ function showRegister() {
     modalDialogElement.appendChild(modalContentElement);
 
     mainElement.appendChild(modalDialogElement);
+
+    modalBodyElement.appendChild(formElement);
 }
 
 function closeForm() {
