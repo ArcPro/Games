@@ -85,9 +85,13 @@ function registerUser($username, $password, $email) {
 
 
     if (!checkUser($username)) {
-        $hash = password_hash($password, PASSWORD_BCRYPT);
-        $pdo->createUser($username, $email, $hash);
-        
+        if ($password.length() >= 8) {
+            if ($password.length() <= 24) {
+                $hash = password_hash($password, PASSWORD_BCRYPT);
+                $pdo->createUser($username, $email, $hash);
+                loginUser($username, $password);
+            }
+        }
         //controles mdp 
             //Affichage message succès
         echo '<div class="alert alert-success">
