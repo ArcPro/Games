@@ -11,13 +11,13 @@ if (isset($_POST["login"]))
 }
 
 //----REGISTER-----//
-if (isset($_POST["Enregistrer"]))
+if (isset($_POST["register"]))
 {
             
-    $username=trim($_POST["username"]);
+    $username=trim($_POST["pseudo"]);
     $email=trim($_POST["email"]);
     $password=trim($_POST["password"]);
-    $pdo->createUser($username, $email, $password);
+    registerUser($username, $password, $email);
 }
 
 if (isset($_POST["Enregistrer"]))
@@ -85,10 +85,11 @@ function registerUser($username, $password, $email) {
 
 
     if (!checkUser($username)) {
-        if ($password.length() >= 8) {
-            if ($password.length() <= 24) {
+        if (strlen($password >= 8)) {
+            if (strlen($password <= 24)) {
                 $hash = password_hash($password, PASSWORD_BCRYPT);
-                $pdo->createUser($username, $email, $hash);
+                $uuid = format_uuidv4(random_bytes(16));
+                $pdo->createUser($uuid, $username, $email, $hash);
                 loginUser($username, $password);
             }
         }

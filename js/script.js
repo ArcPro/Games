@@ -253,10 +253,10 @@ function showRegister() {
     formGroup4Element.appendChild(confirmationLabelElement);
     formGroup4Element.appendChild(confirmationInputElement);
 
-    formElement.appendChild(formGroup1Element);
-    formElement.appendChild(formGroup2Element);
-    formElement.appendChild(formGroup3Element);
-    formElement.appendChild(formGroup4Element);
+    modalBodyElement.appendChild(formGroup1Element);
+    modalBodyElement.appendChild(formGroup2Element);
+    modalBodyElement.appendChild(formGroup3Element);
+    modalBodyElement.appendChild(formGroup4Element);
 
     const modalFooterElement = document.createElement('div');
     modalFooterElement.classList.add('modal-footer');
@@ -268,23 +268,26 @@ function showRegister() {
     loginAccButtonElement.textContent = "J'ai déjà un compte";
     loginAccButtonElement.addEventListener('click', showLogin);
 
-    const registerButtonElement = document.createElement('button');
-    registerButtonElement.setAttribute('type', 'button');
+    const registerButtonElement = document.createElement('input');
+    registerButtonElement.setAttribute('type', 'submit');
     registerButtonElement.classList.add('btn', 'btn-primary');
     registerButtonElement.textContent = "S'enregistrer";
+    registerButtonElement.setAttribute('value', "S'enregistrer");
+    registerButtonElement.setAttribute('name', 'register');
 
     modalFooterElement.appendChild(loginAccButtonElement);
     modalFooterElement.appendChild(registerButtonElement);
 
-    modalContentElement.appendChild(modalHeaderElement);
-    modalContentElement.appendChild(modalBodyElement);
-    modalContentElement.appendChild(modalFooterElement);
+    modalContentElement.appendChild(formElement);
+
+    formElement.appendChild(modalHeaderElement);
+    formElement.appendChild(modalBodyElement);
+    formElement.appendChild(modalFooterElement);
 
     modalDialogElement.appendChild(modalContentElement);
 
     mainElement.appendChild(modalDialogElement);
 
-    modalBodyElement.appendChild(formElement);
 }
 
 function closeForm() {
