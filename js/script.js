@@ -19,7 +19,7 @@ function showLogin() {
     const modalContentElement = document.createElement('div');
     modalContentElement.classList.add('modal-content');
     modalContentElement.style.color = 'black';
-    modalContentElement.style.height = '400px';
+    modalContentElement.style.height = '370px';
 
     const formElement = document.createElement('form');
     formElement.setAttribute('method', 'post');
@@ -311,12 +311,12 @@ function closeForm() {
 //     });
 // });
 
-function showProfile(name) {
+function showProfile(uuid) {
     if (inProfile == false) {
         $.ajax({
             url: "../chess/php/client/profile.php",
             dataType: "html",
-            data: { username: name }, // Variable à envoyer au script PHP
+            data: { uuid: uuid }, // Variable à envoyer au script PHP
             success: function(response) {
                 $("#main").html(response);
                 // history.pushState(null, null, "/profile/"+name); // Modifie l'URL en "/profile" sans recharger la page

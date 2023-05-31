@@ -27,17 +27,19 @@ class User {
 
     //attributs profil
     public $uuid;
+    public $username;
+    public $permission;
     public $date;
     public $nbDuelJoue;
     public $nbDuelGagne;
-    public $rank;
 
-    public function __construct($uuid, $date, $nbDuelJoue, $nbDuelGagne, $rank){
+    public function __construct($uuid, $username, $permission, $date, $nbDuelJoue, $nbDuelGagne){
         $this-> uuid= $uuid;
+        $this-> username= $username;
+        $this-> permission = $permission;
         $this-> date = $date;
         $this-> nbDuelJoue = $nbDuelJoue;
         $this-> nbDuelGagne = $nbDuelGagne;
-        $this-> $rank = $rank;
 
     }
 

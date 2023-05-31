@@ -1,9 +1,8 @@
 <?php
 include "database.php";
-include "login_system.php";
-function getProfileInfos($username) {
+function getProfileInfos($uuid) {
     global $pdo;
-    return $pdo->getProfile($username);
+    return $pdo->getProfile($uuid);
 }
 
-$userInfos = getProfileInfos($_GET['username']);
+$userInfos = getProfileInfos($_GET['uuid']);

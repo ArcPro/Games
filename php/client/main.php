@@ -1,6 +1,8 @@
 
 
-
+<?php 
+// include_once "php/server/utils.php";
+ ?>
 
 <body>
     <script type="text/javascript">/*!
@@ -119,13 +121,13 @@ body {
 <div class="d-flex w-100 h-100 p-3 mx-auto flex-column" style="max-width: 55em;">
   <header class="masthead mb-auto">
     <div class="inner">
-      <h3 class="masthead-brand">Cover</h3>
+      <h3 class="masthead-brand">FrenchChess</h3>
       <nav class="nav nav-masthead justify-content-center">
-        <a class="nav-link active" href="#" id="nav-one">Home</a>
-        <a class="nav-link" href="#" id="nav-two">Features</a>
-        <a class="nav-link" href="#" id="nav-three">Contact</a>
+        <a class="nav-link active" href="#" id="nav-one">Accueil</a>
+        <a class="nav-link" href="#" id="nav-two">Jouer</a>
+        <a class="nav-link" href="#" id="nav-three">Classement</a>
         <?php
-       echo (isLogged()) ? '<a href="#"><img src="image/avatar/default.png" style="width:35px;height:35px;margin-left:20px;border-radius:50px;" onclick="showProfile(\'' . $_SESSION["username"] . '\')" id="profile-main-picture"></a>' : /*if condition is false*/ '<a href=""><img src="image/user-plus.png" style="width:35px;height:35px;margin-left:20px;" onclick="showLogin()"></a>' ;
+       echo (isLogged()) ? '<a href="#"><img src="image/avatar/default.png" style="width:35px;height:35px;margin-left:20px;border-radius:50px;" onclick="showProfile(\'' . $_SESSION["uuid"] . '\')" id="profile-main-picture"></a>' : /*if condition is false*/ '<a href=""><img src="image/user-plus.png" style="width:35px;height:35px;margin-left:20px;" onclick="showLogin()"></a>' ;
        ?>        
         
       </nav>
@@ -133,11 +135,53 @@ body {
   </header>
 
   <main role="main" class="inner cover" id="main">
-    <h1 class="cover-heading">Cover your page.</h1>
-    <p class="lead">Cover is a one-page template for building simple and beautiful home pages. Download, edit the text, and add your own fullscreen background photo to make it your own.</p>
-    <p class="lead">
-      <a href="#" class="btn btn-lg btn-secondary">Learn more</a>
-    </p>
+  <div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <ol class="carousel-indicators">
+      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+      <li data-target="#myCarousel" data-slide-to="1" class=""></li>
+      <li data-target="#myCarousel" data-slide-to="2" class=""></li>
+    </ol>
+    <div class="carousel-inner">
+      <div class="carousel-item">
+        <img src="image/slide3.jpg" style="height:500px;">
+        <div class="container">
+          <div class="carousel-caption text-left">
+            <h1>Example headline.</h1>
+            <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+            <p><a class="btn btn-lg btn-primary" href="#" role="button">Sign up today</a></p>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-item active">
+        <img src="image/slide1.jpg" style="height:500px;">
+        <div class="container">
+          <div class="carousel-caption">
+            <h1>Bienvenue.</h1>
+            <p>Rejoignez votre site d'echecs en ligne avec plus de <?php echo TotalMembers()?> membres actifs !</p>
+            <p><a class="btn btn-lg btn-primary" href="#" role="button">Rejoignez nous</a></p>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img src="image/slide2.jpg" style="height:500px;">
+        <div class="container">
+          <div class="carousel-caption text-right">
+            <h1>One more for good measure.</h1>
+            <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+            <p><a class="btn btn-lg btn-primary" href="#" role="button">Browse gallery</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
   </main>
 
 <!-- <main role="main" class="inner cover" id="main"> 
@@ -212,7 +256,7 @@ body {
 
   <footer class="mastfoot mt-auto">
     <div class="inner">
-      <p>© 2023 <a href="http://localhost/ArcPro/Games/index.php">Chess</a>. Tous droits réservés. Proposé par <a href="">@XXX</a>.</p>
+      <p>© 2023 <a href="http://localhost/ArcPro/Games/index.php">FrenchChess</a>. Tous droits réservés. Proposé par <a href="">@XXX</a>.</p>
     </div>
   </footer>
 </div>

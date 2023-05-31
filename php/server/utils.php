@@ -17,3 +17,8 @@ function getRank($rank) {
  else if ($rank == 2) { return '<span class="badge badge-success">Modérateur</span>';}
  else if ($rank == 3) { return '<span class="badge badge-danger">Administrateur</span>';}
 }
+
+function TotalMembers() {
+  global $pdo;
+  return $pdo->getTotalMembers();
+}

@@ -30,6 +30,16 @@ class bdd {
 
 //------REQUETES------//
 
+// Get total members
+    public function getTotalMembers() {
+        $q = "SELECT COUNT(*) FROM `user`";
+        $stmt = bdd::$monPdo->prepare($q); // Préparer la requête
+        $stmt->execute(); // Exécuter la requête préparée
+        $totalMembers = $stmt->fetchColumn(); // Récupérer le résultat de la requête
+        return $totalMembers;
+    }
+
+
 //CHECK IF USER EXISTS//
     public function checkUserExistence($username) {
         $q = "SELECT * FROM `user` WHERE username = :username";
@@ -91,17 +101,26 @@ public function getCommentsByID($uuid)
 }
 
 //GET PROFILE
-public function getProfile($username) 
+public function getProfile($uuid) 
 {
-    $user = $this->getUserInformations($username);
-    return $user;
-    // $req = "SELECT uuid, date, nbDuelJoue, nbDuelGagne, rank FROM `profile` WHERE uuid = :uuid";
-    // $prep = bdd::$monPdo->prepare($req);
-    // $prep->bindValue(':uuid', $uuid, PDO::PARAM_STR);
-    // $prep->execute();
-    // $result = $prep->fetch(PDO::FETCH_ASSOC);
-    
-    // return new Profile($result["uuid"], $result["date"], $result["nbDuelJoue"], $result["nbDuelGagne"], $result["rank"]);
+    $q = "SELECT username, permission, date FROM `user` WHERE uuid = :uuid";
+        $prep = bdd::$monPdo->prepare($q);
+        $prep->bindValue(':uuid', $uuid, PDO::PARAM_STR);
+        $prep->execute();
+        $globalUserInfos = $prep->fetch(PDO::FETCH_ASSOC);
+
+    $q = "SELECT count(*) as nbDuel FROM `duel` WHERE user1Uuid = :uuid OR user2Uuid = :uuid";
+        $prep = bdd::$monPdo->prepare($q);
+        $prep->bindValue(':uuid', $uuid, PDO::PARAM_STR);
+        $prep->execute();
+        $nbDuel = $prep->fetch(PDO::FETCH_ASSOC);
+    $q = "SELECT count(*) as nbWin FROM `duel` WHERE user1Uuid = :uuid OR user2Uuid = :uuid AND winnerUuid = :uuid";
+        $prep = bdd::$monPdo->prepare($q);
+        $prep->bindValue(':uuid', $uuid, PDO::PARAM_STR);
+        $prep->execute();
+        $nbWin = $prep->fetch(PDO::FETCH_ASSOC);
+
+    return new Profile($uuid, $globalUserInfos["username"], $globalUserInfos["permission"], $globalUserInfos["date"], $nbDuel["nbDuel"], $nbWin["nbWin"]);
 }
 
 

@@ -5,6 +5,7 @@ session_start();
 // }
 include_once "../server/utils.php";
 include_once "../server/profile_infos.php";
+// print_r($userInfos);
 // echo $_GET['username'];
 ?>
 
@@ -107,7 +108,7 @@ include_once "../server/profile_infos.php";
                 <?php echo getRank($userInfos->permission); ?>
                 <!-- <p class="badge badge-secondary">Secondary</p> -->
             </div>
-            <div class="card-body" style="margin-top:-45px;margin-left:-40px;display:flex;width:111%;">
+            <div class="card-body" style="margin-top:-45px;margin-left:-25px;display:flex;width:111%;">
                 <div class="card-body" style="text-align:center;">
                     <img src="image/calendar.png" alt="Date d'inscription" title="Date d'inscription" style="width:45px;height:45px;">
                     <p style="margin-top:5px;"><?php echo $userInfos->date; ?></p>
@@ -118,22 +119,22 @@ include_once "../server/profile_infos.php";
                 </div>
                 <div class="card-body" style="text-align:center;">
                     <img src="image/games_number.png" alt="Parties jouées" title="Parties jouées" style="width:45px;height:45px;">
-                    <p style="margin-top:5px;">113</p>
+                    <p style="margin-top:5px;"><?php echo $userInfos->nbDuelJoue; ?></p>
                 </div>
                 <div class="card-body" style="text-align:center;">
                     <img src="image/wins_number.png" alt="Parties gagnées" title="Parties gagnées" style="width:45px;height:45px;">
-                    <p style="margin-top:5px;">58</p>
+                    <p style="margin-top:5px;"><?php echo $userInfos->nbDuelGagne; ?></p>
                 </div>
                 
             </div>    
         </div>
 
         <div style="display:block">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <?php if ($_GET['username'] == $_SESSION['username']){echo '<span aria-hidden="true" style="font-size:13px;" onclick="logout()">Se déconnecter</span>';} ?>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="margin-left:-30px;">
+                <?php if ($_GET['uuid'] == $_SESSION['uuid']){echo '<span aria-hidden="true" style="font-size:13px;" onclick="logout()">Se déconnecter</span>';} ?>
             </button>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="margin-top:200px;">
-                <?php if ($_GET['username'] == $_SESSION['username']){echo '<span aria-hidden="true" style="font-size:13px;" onclick="editProfile()">Modifier</span>';} ?>
+                <?php if ($_GET['uuid'] == $_SESSION['uuid']){echo '<span aria-hidden="true" style="font-size:13px;" onclick="editProfile()">Modifier</span>';} ?>
             </button>
 
         </div>
