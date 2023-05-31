@@ -1,6 +1,12 @@
 <?php
 
-$pdo=bdd::getBdd();
+// var image = document.getElementById('profile-main-picture');
+
+//         image.src = 'image/user-plus.png';
+//         image.removeAttribute('onclick');
+//         image.addEventListener('click', showLogin);
+//         image.style.border = 'none';
+//         navOne.classList.add('active');
 
 //----LOGIN-----//
 if (isset($_POST["login"]))
@@ -40,6 +46,7 @@ function loginUser($username, $password) {
         $hash = $pdo->getUserPassword($username);
         if (password_verify($password, $hash)) {
             // Récupérer toutes les informations de l'utilisateur
+            
             $user = $pdo->getUserInformations($username);
             // var_dump($user);
 
@@ -48,6 +55,8 @@ function loginUser($username, $password) {
             $_SESSION["email"] = $user->email;
             $_SESSION["permission"] = $user->permission;
             $_SESSION["date"] = $user->date;
+            // header("Location: http://www.$_SESSION['email'].com/another-page.php", true, 301);
+            // exit();
         } else {
             echo '<script>
             window.addEventListener("load", function () {

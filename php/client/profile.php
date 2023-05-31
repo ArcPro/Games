@@ -1,6 +1,10 @@
 <?php
 session_start();
+// if ($_GET['username'] != $_SESSION['username']) {
+
+// }
 include_once "../server/utils.php";
+include_once "../server/profile_infos.php";
 // echo $_GET['username'];
 ?>
 
@@ -33,6 +37,17 @@ include_once "../server/utils.php";
             data: { username: name }, // Variable à envoyer au script PHP
             success: function(response) {
                 $("#comments-stats").html(response);
+                // history.pushState(null, null, "/profile/"+name); // Modifie l'URL en "/profile" sans recharger la page
+            }
+        });
+    }
+
+    function logout() {
+        $.ajax({
+            url: "php/server/logout.php",
+            dataType: "html",
+            success: function(response) {
+                window.location.href='http://localhost/chess/';
                 // history.pushState(null, null, "/profile/"+name); // Modifie l'URL en "/profile" sans recharger la page
             }
         });
@@ -88,16 +103,16 @@ include_once "../server/utils.php";
         <img src="image/avatar/default.png" style="width:180px;height:180px;margin-left:20px;margin-top:22px;">
         <div style="display:block;margin-left:15px;">
             <div class="card-body">
-                <h5 class="modal-title" style="font-size:25px;font-weight:bold;margin-top:10px;"><?php echo $_GET['username']?></h5>
-                <?php echo getRank(3); ?>
+                <h5 class="modal-title" style="font-size:25px;font-weight:bold;margin-top:10px;"><?php echo $userInfos->username?></h5>
+                <?php echo getRank($userInfos->permission); ?>
                 <!-- <p class="badge badge-secondary">Secondary</p> -->
             </div>
             <div class="card-body" style="margin-top:-45px;margin-left:-40px;display:flex;width:111%;">
                 <div class="card-body" style="text-align:center;">
                     <img src="image/calendar.png" alt="Date d'inscription" title="Date d'inscription" style="width:45px;height:45px;">
-                    <p style="margin-top:5px;">29 mai 2023</p>
+                    <p style="margin-top:5px;"><?php echo $userInfos->date; ?></p>
                 </div>
-                <div class="card-body" style="text-align:center;" onclick="showFriendslist('<?php echo $_GET['username'];?>')">
+                <div class="card-body" style="text-align:center;" onclick="showFriendslist('<?php echo $userInfos->username;?>')">
                     <img src="image/friends.png" alt="Amis" title="Amis" style="width:45px;height:45px;" id="friends">
                     <p style="margin-top:5px;">5</p>
                 </div>
@@ -113,9 +128,15 @@ include_once "../server/utils.php";
             </div>    
         </div>
 
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-        <?php if ($_GET['username'] == $_SESSION['username']){echo '<span aria-hidden="true" style="font-size:13px;" onclick="editProfile()">Modifier</span>';} ?>
-        </button>
+        <div style="display:block">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <?php if ($_GET['username'] == $_SESSION['username']){echo '<span aria-hidden="true" style="font-size:13px;" onclick="logout()">Se déconnecter</span>';} ?>
+            </button>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="margin-top:200px;">
+                <?php if ($_GET['username'] == $_SESSION['username']){echo '<span aria-hidden="true" style="font-size:13px;" onclick="editProfile()">Modifier</span>';} ?>
+            </button>
+
+        </div>
     </div>
   </div>
 </div>

@@ -91,22 +91,23 @@ public function getCommentsByID($uuid)
 }
 
 //GET PROFILE
-public function getProfile($uuid) 
+public function getProfile($username) 
 {
-    $user = $this->getUserInformations($uuid);
-    $uuid = $user->uuid;
-    $req = "SELECT uuid, date, nbDuelJoue, nbDuelGagne, rank FROM `profile` WHERE uuid = :uuid";
-    $prep = bdd::$monPdo->prepare($req);
-    $prep->bindValue(':uuid', $uuid, PDO::PARAM_STR);
-    $prep->execute();
-    $result = $prep->fetch(PDO::FETCH_ASSOC);
+    $user = $this->getUserInformations($username);
+    return $user;
+    // $req = "SELECT uuid, date, nbDuelJoue, nbDuelGagne, rank FROM `profile` WHERE uuid = :uuid";
+    // $prep = bdd::$monPdo->prepare($req);
+    // $prep->bindValue(':uuid', $uuid, PDO::PARAM_STR);
+    // $prep->execute();
+    // $result = $prep->fetch(PDO::FETCH_ASSOC);
     
-    return new Profile($result["uuid"], $result["date"], $result["nbDuelJoue"], $result["nbDuelGagne"], $result["rank"]);
+    // return new Profile($result["uuid"], $result["date"], $result["nbDuelJoue"], $result["nbDuelGagne"], $result["rank"]);
 }
 
 
 
 }
 
+$pdo=bdd::getBdd();
 
 ?>
