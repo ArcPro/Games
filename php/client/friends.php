@@ -43,7 +43,7 @@ session_start();
             </div>
         </div>
     </div>
-    <div class="chatdiv">
+    <div class="chatdiv" style="height:200px;">
         <div style="width:99%;height:55px;margin-left:0.8%;margin-top:5px;display:flex;border-bottom:solid 1px #00000063;">
             <img src="image/avatar/default.png" style="width:50px;height:50px;border-radius:5px;">
             <div class="card-body" style="margin-top:-20px;width:80%;">
