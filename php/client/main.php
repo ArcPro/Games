@@ -148,7 +148,7 @@ body {
           <div class="carousel-caption text-left">
             <h1>Example headline.</h1>
             <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-            <p><a class="btn btn-lg btn-primary" href="#" role="button">Sign up today</a></p>
+            <p><a class="btn btn-lg btn-primary" href="#" role="button" style="margin-bottom:100px;">Sign up today</a></p>
           </div>
         </div>
       </div>
@@ -158,7 +158,7 @@ body {
           <div class="carousel-caption">
             <h1>Bienvenue.</h1>
             <p>Rejoignez votre site d'echecs en ligne avec plus de <?php echo TotalMembers()?> membres actifs !</p>
-            <p><a class="btn btn-lg btn-primary" href="#" role="button">Rejoignez nous</a></p>
+            <p><a class="btn btn-lg btn-primary" href="#" role="button" style="margin-bottom:100px;">Rejoignez nous</a></p>
           </div>
         </div>
       </div>
@@ -168,7 +168,7 @@ body {
           <div class="carousel-caption text-right">
             <h1>One more for good measure.</h1>
             <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-            <p><a class="btn btn-lg btn-primary" href="#" role="button">Browse gallery</a></p>
+            <p><a class="btn btn-lg btn-primary" href="#" role="button" style="margin-bottom:100px;">Browse gallery</a></p>
           </div>
         </div>
       </div>
