@@ -92,7 +92,7 @@ public function getCommentsByID($uuid)
     $req = "SELECT user.uuid, user.username, user.avatar, comment.message, comment.date 
             FROM `comment` 
             JOIN `user` ON user.uuid=comment.userUuid 
-            WHERE user.uuid = :uuid AND comment.visibility = 0 ORDER BY comment.date DESC";
+            WHERE comment.profileUuid = :uuid AND comment.visibility = 0 ORDER BY comment.date DESC";
     $prep = bdd::$monPdo->prepare($req);
     $prep->bindValue(':uuid', $uuid, PDO::PARAM_STR);
     $prep->execute();
