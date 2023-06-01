@@ -55,12 +55,12 @@ class bdd {
 
 //GET USER INFOS//
     public function getUserInformations($username) {
-        $q = "SELECT uuid, username, email, permission, date FROM `user` WHERE username = :username";
+        $q = "SELECT uuid, username, email, permission, date, avatar FROM `user` WHERE username = :username";
         $prep = bdd::$monPdo->prepare($q);
         $prep->bindValue(':username', $username, PDO::PARAM_STR);
         $prep->execute();
         $result = $prep->fetch(PDO::FETCH_ASSOC);
-        return new User($result["uuid"], $result["username"], $result["email"], $result["permission"], $result["date"]);
+        return new User($result["uuid"], $result["username"], $result["email"], $result["permission"], $result["date"], $result["avatar"]);
     }
 
 //GET USER PASSWORD//
@@ -89,21 +89,20 @@ public function createUser($uuid, $username, $email, $password)
 //GET COMMENT BY ID//
 public function getCommentsByID($uuid)
 {
-    $req = "SELECT user.uuid, comment.message, comment.visibility, comment.date 
+    $req = "SELECT user.uuid, user.username, user.avatar, comment.message, comment.date 
             FROM `comment` 
             JOIN `user` ON user.uuid=comment.userUuid 
-            WHERE user.uuid = :uuid";
+            WHERE user.uuid = :uuid AND comment.visibility = 0 ORDER BY comment.date DESC";
     $prep = bdd::$monPdo->prepare($req);
     $prep->bindValue(':uuid', $uuid, PDO::PARAM_STR);
     $prep->execute();
     return $prep->fetchAll(PDO::FETCH_ASSOC);
-    
 }
 
 //GET PROFILE
 public function getProfile($uuid) 
 {
-    $q = "SELECT username, permission, date FROM `user` WHERE uuid = :uuid";
+    $q = "SELECT username, permission, date, avatar FROM `user` WHERE uuid = :uuid";
         $prep = bdd::$monPdo->prepare($q);
         $prep->bindValue(':uuid', $uuid, PDO::PARAM_STR);
         $prep->execute();
@@ -119,10 +118,17 @@ public function getProfile($uuid)
         $prep->bindValue(':uuid', $uuid, PDO::PARAM_STR);
         $prep->execute();
         $nbWin = $prep->fetch(PDO::FETCH_ASSOC);
-
-    return new Profile($uuid, $globalUserInfos["username"], $globalUserInfos["permission"], $globalUserInfos["date"], $nbDuel["nbDuel"], $nbWin["nbWin"]);
+        return new Profile($uuid, $globalUserInfos["username"], $globalUserInfos["permission"], $globalUserInfos["date"], $globalUserInfos["avatar"], $nbDuel["nbDuel"], $nbWin["nbWin"]);
 }
 
+public function sendComment($userUuid, $profileUuid, $message) {
+    $req = "INSERT INTO `comment` (`userUuid`, `profileUuid`, `message`) VALUES (:userUuid, :profileUuid, :message)";
+    $prep = bdd::$monPdo->prepare($req);
+    $prep->bindValue(':userUuid', $userUuid, PDO::PARAM_STR);
+    $prep->bindValue(':profileUuid', $profileUuid, PDO::PARAM_STR);
+    $prep->bindValue(':message', $message, PDO::PARAM_STR);
+    $prep->execute();
+}
 
 
 }

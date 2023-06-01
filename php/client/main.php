@@ -127,7 +127,7 @@ body {
         <a class="nav-link" href="#" id="nav-two">Jouer</a>
         <a class="nav-link" href="#" id="nav-three">Classement</a>
         <?php
-       echo (isLogged()) ? '<a href="#"><img src="image/avatar/default.png" style="width:35px;height:35px;margin-left:20px;border-radius:50px;" onclick="showProfile(\'' . $_SESSION["uuid"] . '\')" id="profile-main-picture"></a>' : /*if condition is false*/ '<a href=""><img src="image/user-plus.png" style="width:35px;height:35px;margin-left:20px;" onclick="showLogin()"></a>' ;
+       echo (isLogged()) ? '<a href="#"><img src="image/avatar/'.$_SESSION["avatar"].'.png" style="width:35px;height:35px;margin-left:20px;border-radius:50px;" onclick="showProfile(\'' . $_SESSION["uuid"] . '\')" id="profile-main-picture"></a>' : /*if condition is false*/ '<a href=""><img src="image/user-plus.png" style="width:35px;height:35px;margin-left:20px;" onclick="showLogin()"></a>' ;
        ?>        
         
       </nav>

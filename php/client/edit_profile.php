@@ -3,16 +3,16 @@ session_start();
 include_once "../server/update_profile.php";
 ?>
 <script>
-function closEditForm(name) {
+function closEditForm(uuid, username, avatar) {
     inProfile = false
-    showProfile(name)
+    showDefaultStats(uuid, username, avatar)
 }    
 </script>
 <form method="post">
     <div class="modal-header" style="height:50px;">
       <h6>Modifier le profil</h6>
       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-      <span aria-hidden="true" onclick="closEditForm('<?php echo $_SESSION['username'];?>')">×</span>
+      <span aria-hidden="true" onclick="closEditForm('<?php echo $_GET['uuid'];?>','<?php echo $_GET['username'];?>','<?php echo $_GET['avatar'];?>')">×</span>
       </button>
     </div>
     <div class="modal-body" style="margin-top:-10px;">

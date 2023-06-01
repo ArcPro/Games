@@ -15,9 +15,8 @@ session_start();
     });
 
     function closeFriends(name) {
-        console.log(name)
         inProfile = false
-        showProfile(name)
+        showDefaultStats(name)
     }
 </script>
 

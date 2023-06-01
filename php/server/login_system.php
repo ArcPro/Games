@@ -55,6 +55,7 @@ function loginUser($username, $password) {
             $_SESSION["email"] = $user->email;
             $_SESSION["permission"] = $user->permission;
             $_SESSION["date"] = $user->date;
+            $_SESSION["avatar"] = $user->avatar;
             // header("Location: http://www.$_SESSION['email'].com/another-page.php", true, 301);
             // exit();
         } else {
