@@ -15,11 +15,12 @@ function getComments($uuid) {
     $msg = $pdo->getCommentsByID($uuid);
     for ($i = 0 ; $i<count($msg) ; $i++) {
         // $msg->
-        echo '<div class="chatrow">
+        // echo "<script>showProfile('')</script>";
+        echo '<div class="chatrow" onclick="inProfile=false;console.log(inProfile);showProfile(\'' . $msg[$i]["uuid"] . '\')">
             <div class="chatbox">
                 <img src="image/avatar/'.$msg[$i]["avatar"].'.png" style="width:50px;height:50px;border-radius:5px;">
                 <div class="card-body" style="margin-top:-20px;">
-                    <a>'.$msg[$i]["username"].'</a>
+                    <a >'.$msg[$i]["username"].'</a>
                     <p>'.$msg[$i]["message"].'</p>
                 </div>
             </div>

@@ -121,7 +121,7 @@ public function getProfile($uuid)
         return new Profile($uuid, $globalUserInfos["username"], $globalUserInfos["permission"], $globalUserInfos["date"], $globalUserInfos["avatar"], $nbDuel["nbDuel"], $nbWin["nbWin"]);
 }
 
-public function sendComment($userUuid, $profileUuid, $message) {
+public function sendComment($profileUuid, $userUuid, $message) {
     $req = "INSERT INTO `comment` (`userUuid`, `profileUuid`, `message`) VALUES (:userUuid, :profileUuid, :message)";
     $prep = bdd::$monPdo->prepare($req);
     $prep->bindValue(':userUuid', $userUuid, PDO::PARAM_STR);

@@ -326,3 +326,19 @@ function showProfile(uuid) {
     }
     
 }
+
+// function goHome(uuid) {
+//     if (inProfile == false) {
+//         $.ajax({
+//             url: "../chess/php/client/profile.php",
+//             dataType: "html",
+//             data: { uuid: uuid }, // Variable à envoyer au script PHP
+//             success: function(response) {
+//                 $("#main").html(response);
+//                 // history.pushState(null, null, "/profile/"+name); // Modifie l'URL en "/profile" sans recharger la page
+//             }
+//         });
+//         inProfile = true;
+//     }
+    
+// }

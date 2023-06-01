@@ -13,6 +13,6 @@
     <script src="js/script.js"></script>
 
 </head>
-<body>
+<body id="body">
     
 </body>

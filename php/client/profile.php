@@ -20,12 +20,12 @@ $userInfos = getProfileInfos($_GET['uuid']);
     profileImage.style.border = "2px solid white";
     profileImage.style.borderRadius = "50%";
 
-    function showFriendslist(name) {
+    function showFriendslist(uuid, username, avatar) {
         console.log('test')
         $.ajax({
             url: "php/client/friends.php",
             dataType: "html",
-            data: { username: name }, // Variable à envoyer au script PHP
+            data: { uuid, username, avatar }, // Variable à envoyer au script PHP
             success: function(response) {
                 $("#comments-stats").html(response);
                 // history.pushState(null, null, "/profile/"+name); // Modifie l'URL en "/profile" sans recharger la page
@@ -113,9 +113,9 @@ $userInfos = getProfileInfos($_GET['uuid']);
 </style>
 
 <div class="modal-dialog" role="document" style="max-width: 700px;">
-  <div class="modal-content" style="color:black; border-radius:10px;">
+  <div class="modal-content" style="color:black; border-radius:10px;height:300px;">
     <div class="modal-header" style="border-bottom:none;">
-        <img src="image/avatar/<?php echo $_SESSION["avatar"]; ?>.png" style="width:180px;height:180px;margin-left:20px;margin-top:22px;">
+        <img src="image/avatar/<?php echo $userInfos->avatar; ?>.png" style="width:180px;height:180px;margin-left:20px;margin-top:22px;">
         <div style="display:block;margin-left:15px;">
             <div class="card-body">
                 <h5 class="modal-title" style="font-size:25px;font-weight:bold;margin-top:10px;"><?php echo $userInfos->username?></h5>
@@ -127,7 +127,7 @@ $userInfos = getProfileInfos($_GET['uuid']);
                     <img src="image/calendar.png" alt="Date d'inscription" title="Date d'inscription" style="width:45px;height:45px;">
                     <p style="margin-top:5px;"><?php echo $userInfos->date; ?></p>
                 </div>
-                <div class="card-body" style="text-align:center;" onclick="showFriendslist('<?php echo $userInfos->username;?>')">
+                <div class="card-body" style="text-align:center;" onclick="showFriendslist('<?php echo $userInfos->uuid;?>','<?php echo $userInfos->username;?>','<?php echo $userInfos->avatar;?>')">
                     <img src="image/friends.png" alt="Amis" title="Amis" style="width:45px;height:45px;" id="friends">
                     <p style="margin-top:5px;">5</p>
                 </div>
