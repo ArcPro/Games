@@ -24,6 +24,7 @@ session_start();
     <div class="modal-header">
       <h5 class="modal-title">Amis</h5><span class="badge badge-dark" style="width:30px;height:30px;font-size:13px;font-weight:bold;text-align:center;padding-top:7px;margin-left:10px;">12</span>
       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button type="button">Ajouter un ami</button>
         <span aria-hidden="true" onclick="closeFriends('<?php echo $_GET['uuid'];?>','<?php echo $_GET['username'];?>','<?php echo $_GET['avatar'];?>')">×</span>
       </button>
     </div>

@@ -130,6 +130,31 @@ public function sendComment($profileUuid, $userUuid, $message) {
     $prep->execute();
 }
 
+//--- FRIENDS SYSTEM ---//
+
+//Add friend
+public function addFriend($user1Id, $user2Id) {
+    $req = "INSERT INTO `friends` (`user1`, `user2`) VALUES (:user1Id, :user2Id)";
+    $prep = bdd::$monPdo->prepare($req);
+    $prep->bindValue(':user1Id', $user1Id, PDO::PARAM_STR);
+    $prep->bindValue(':user2Id', $user2Id, PDO::PARAM_STR);
+    $prep->execute();
+}
+
+
+
+//
+
+
+
+
+
+
+
+
+
+
+
 
 }
 
