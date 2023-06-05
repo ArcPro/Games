@@ -123,7 +123,9 @@ body {
       <h3 class="masthead-brand">FrenchChess</h3>
       <nav class="nav nav-masthead justify-content-center">
         <a class="nav-link active" href="#" id="nav-one">Accueil</a>
-        <a class="nav-link" href="#" id="nav-two">Jouer</a>
+        <?php if (isset($_SESSION['uuid'])) {echo '<a class="nav-link" href="#" id="nav-two" onclick="createGame()">Jouer</a>';}
+        else {echo '<a class="nav-link" href="#" id="nav-two" onclick="showLogin()">Jouer</a>';}?>
+        
         <a class="nav-link" href="#" id="nav-three">Classement</a>
         <?php
        echo (isLogged()) ? '<a href="#"><img src="image/avatar/'.$_SESSION["avatar"].'.png" style="width:35px;height:35px;margin-left:20px;border-radius:50px;" onclick="showProfile(\'' . $_SESSION["uuid"] . '\')" id="profile-main-picture"></a>' : /*if condition is false*/ '<a href=""><img src="image/user-plus.png" style="width:35px;height:35px;margin-left:20px;" onclick="showLogin()"></a>' ;

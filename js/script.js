@@ -324,7 +324,17 @@ function showProfile(uuid) {
         });
         inProfile = true;
     }
-    
+}
+
+function createGame() {
+        $.ajax({
+            url: "../chess/php/client/games/create_game.php",
+            dataType: "html",
+            success: function(response) {
+                $("#main").html(response);
+                // history.pushState(null, null, "/profile/"+name); // Modifie l'URL en "/profile" sans recharger la page
+            }
+        });
 }
 
 // function goHome(uuid) {
