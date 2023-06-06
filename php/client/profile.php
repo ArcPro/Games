@@ -12,11 +12,11 @@ $userInfos = getProfileInfos($_GET['uuid']);
 ?>
 
 <script>
-    const navOne = document.getElementById("nav-one");navOne.classList.remove(navOne.classList.item(1));
-    const navTwo = document.getElementById("nav-two");navTwo.classList.remove(navTwo.classList.item(1));
-    const navThree = document.getElementById("nav-three");navThree.classList.remove(navThree.classList.item(1));
+    navOne = document.getElementById("nav-one");navOne.classList.remove(navOne.classList.item(1));
+    navTwo = document.getElementById("nav-two");navTwo.classList.remove(navTwo.classList.item(1));
+    navThree = document.getElementById("nav-three");navThree.classList.remove(navThree.classList.item(1));
 
-    var profileImage = document.getElementById("profile-main-picture");
+    profileImage = document.getElementById("profile-main-picture");
     profileImage.style.border = "2px solid white";
     profileImage.style.borderRadius = "50%";
 

@@ -1,5 +1,6 @@
 // Login form
 var inProfile = false;
+showMain()
 
 function clearMain() {
     document.getElementById('main').innerHTML = ''
@@ -329,15 +330,28 @@ function showProfile(uuid) {
     }
 }
 
+function showMain() {
+    inProfile = false;
+    $.ajax({
+        url: "../chess/php/client/default.php",
+        dataType: "html",
+        success: function(response) {
+            $("#main").html(response);
+            // history.pushState(null, null, "/profile/"+name); // Modifie l'URL en "/profile" sans recharger la page
+        }
+    });
+}
+
 function createGame() {
-        $.ajax({
-            url: "../chess/php/client/games/create_game.php",
-            dataType: "html",
-            success: function(response) {
-                $("#main").html(response);
-                // history.pushState(null, null, "/profile/"+name); // Modifie l'URL en "/profile" sans recharger la page
-            }
-        });
+    inProfile = false;
+    $.ajax({
+        url: "../chess/php/client/games/create_game.php",
+        dataType: "html",
+        success: function(response) {
+            $("#main").html(response);
+            // history.pushState(null, null, "/profile/"+name); // Modifie l'URL en "/profile" sans recharger la page
+        }
+    });
 }
 
 // function goHome(uuid) {
