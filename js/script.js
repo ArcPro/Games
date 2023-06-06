@@ -4,6 +4,9 @@ var inProfile = false;
 function clearMain() {
     document.getElementById('main').innerHTML = ''
 }
+function clearFooter() {
+    document.getElementById('footer').innerHTML = ''
+}
 
 function showLogin() {
     clearMain()

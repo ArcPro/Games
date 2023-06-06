@@ -277,7 +277,7 @@ body {
     </div>
 </main> -->
 
-  <footer class="mastfoot mt-auto">
+  <footer class="mastfoot mt-auto" id="footer">
     <div class="inner">
       <p>© 2023 <a href="http://localhost/ArcPro/Games/index.php">FrenchChess</a>. Tous droits réservés. Proposé par <a href="">@XXX</a>.</p>
     </div>
