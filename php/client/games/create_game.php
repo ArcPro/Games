@@ -1,3 +1,5 @@
+<?php session_start();?>
+<script>console.log("test")</script>
 <script>
   clearFooter()
     navOne = document.getElementById("nav-one");navOne.classList.remove(navOne.classList.item(1));
@@ -5,14 +7,16 @@
     navThree = document.getElementById("nav-three");navThree.classList.remove(navThree.classList.item(1));
     profileImage = document.getElementById("profile-main-picture");
     profileImage.style.border = "0px";
+
+    
   </script>
 
 <div style="display:flex;width:150%;margin-left:-200px;height:100%;">
   <div class="modal-dialog" role="document">
     <div class="modal-content" style="width:140%;">
       <div class="modal-header" style="justify-content:start;color:black;">
-          <img src="../chess/image/avatar/arcpro.png" style="width:50px;">
-          <h6 style="margin-left:10px;font-weight:bold;">ArcPro</h6> 
+          <img src="../chess/image/avatar/default.png" style="width:50px;">
+          <h6 style="margin-left:10px;font-weight:bold;">Joueur</h6> 
           <button type="button" class="btn btn-success" style="margin-left:70%;margin-top:7px;">10:00</button>
       </div>
       <div class="modal-body">
@@ -57,7 +61,7 @@
     <div class="modal-content">
       <div class="modal-body">
       <button type="button" class="btn btn-secondary" style="background-color:#6c757d;color:white;width:300px;margin-left:7px;margin-top:20px;">Original 10 minutes</button>
-      <button type="button" class="btn btn-success" style="width:300px;margin-left:7px;margin-top:20px;margin-bottom:20px;">Créer une partie</button>
+      <button id="createGame" type="button" class="btn btn-success" style="width:300px;margin-left:7px;margin-top:20px;margin-bottom:20px;" onclick="createNewGame()">Créer une partie</button>
       </div>
     </div>
   </div>

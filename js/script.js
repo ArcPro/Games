@@ -369,3 +369,22 @@ function createGame() {
 //     }
     
 // }
+
+// Games
+
+$("#createGame").on('click', function() {
+    setInterval(function() {
+        createNewGame();
+    }, 1000);
+});
+
+function createNewGame() {
+    $.ajax({
+        url: "../chess/php/client/games/lobby_system.php",
+        dataType: "html",
+        success: function(response) {
+            $("#main").html(response);
+            // history.pushState(null, null, "/profile/"+name); // Modifie l'URL en "/profile" sans recharger la page
+        }
+    });
+}
