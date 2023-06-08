@@ -1,15 +1,8 @@
-<?php session_start();?>
-<script>console.log("test")</script>
-<script>
-  clearFooter()
-    navOne = document.getElementById("nav-one");navOne.classList.remove(navOne.classList.item(1));
-    navTwo = document.getElementById("nav-two");navTwo.classList.add("active");
-    navThree = document.getElementById("nav-three");navThree.classList.remove(navThree.classList.item(1));
-    profileImage = document.getElementById("profile-main-picture");
-    profileImage.style.border = "0px";
-
-    
-  </script>
+<?php 
+if (!isset($_SESSION)) {
+  session_start();
+}
+?>
 
 <div style="display:flex;width:150%;margin-left:-200px;height:100%;">
   <div class="modal-dialog" role="document">
@@ -60,9 +53,50 @@
   <div class="modal-dialog" role="document" style="width:350px;margin-left:200px;">
     <div class="modal-content">
       <div class="modal-body">
-      <button type="button" class="btn btn-secondary" style="background-color:#6c757d;color:white;width:300px;margin-left:7px;margin-top:20px;">Original 10 minutes</button>
-      <button id="createGame" type="button" class="btn btn-success" style="width:300px;margin-left:7px;margin-top:20px;margin-bottom:20px;" onclick="createNewGame()">Créer une partie</button>
+      <button id="gameDisplay" type="button" class="btn btn-secondary" style="background-color:#6c757d;color:white;width:300px;margin-left:7px;margin-top:20px;">Original 10 minutes</button>
+      <button id="createGame" type="button" class="btn btn-success" style="width:300px;margin-left:7px;margin-top:20px;margin-bottom:20px;" onclick="createNewGame()">Lancer une partie</button>
       </div>
     </div>
   </div>
 </div>
+
+<script>
+  clearFooter()
+    navOne = document.getElementById("nav-one");navOne.classList.remove(navOne.classList.item(1));
+    navTwo = document.getElementById("nav-two");navTwo.classList.add("active");
+    navThree = document.getElementById("nav-three");navThree.classList.remove(navThree.classList.item(1));
+    profileImage = document.getElementById("profile-main-picture");
+    profileImage.style.border = "0px";
+
+  function removeGame() {
+    console.log("rezfezfez");
+    $.ajax({
+      url: "../chess/php/client/games/lobby_system.php",
+      dataType: "html",
+      data: { remove: 1 }, // Variable à envoyer au script PHP
+      success: function(response) {
+        $("#main").html(response);
+        // history.pushState(null, null, "/profile/"+name); // Modifie l'URL en "/profile" sans recharger la page
+      }
+    });
+    clearInterval(createGame);
+  }
+
+  function createNewGame() {
+    document.getElementById('createGame').onclick = 'removeGame()'
+    console.log(document.getElementById('createGame').onclick);
+    // document.getElementById('createGame').addEventListener('click', removeGame);
+
+    setInterval(function() {
+      $.ajax({
+        url: "../chess/php/client/games/lobby_system.php",
+        dataType: "html",
+        success: function(response) {
+          $("#main").html(response);
+          // history.pushState(null, null, "/profile/"+name); // Modifie l'URL en "/profile" sans recharger la page
+        }
+      });
+    }, 1000);
+      
+  }
+  </script>

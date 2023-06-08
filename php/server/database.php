@@ -143,6 +143,56 @@ public function addFriend($user1Id, $user2Id) {
 
 
 
+//--- GAME SYSTEM ---//
+
+public function verifGameStatus($uuid) {
+    $q = "SELECT user1Uuid, user2Uuid, duelStatus, winnerUuid, date FROM `duel` WHERE user1Uuid = :uuid OR user2Uuid = :uuid ORDER BY date desc";
+        $prep = bdd::$monPdo->prepare($q);
+        $prep->bindValue(':uuid', $uuid, PDO::PARAM_STR);
+        $prep->execute();
+        $gameStatus = $prep->fetch(PDO::FETCH_ASSOC);
+    return $gameStatus;
+}
+
+public function createDuel($uuid) {
+    include_once "utils.php";
+    $duelUuid = format_uuidv4(random_bytes(16));
+    $req = "INSERT INTO `duel` (`uuid`, `user1Uuid`) VALUES (:duelUuid, :uuid)";
+    $prep = bdd::$monPdo->prepare($req);
+    $prep->bindValue(':duelUuid', $duelUuid, PDO::PARAM_STR);
+    $prep->bindValue(':uuid', $uuid, PDO::PARAM_STR);
+    $prep->execute();
+}
+
+public function changeDuelStatus($uuid, $status) {
+    include_once "utils.php";
+    $req = "UPDATE duel SET duelStatus = :status WHERE user1Uuid = :uuid OR user2Uuid = :uuid AND duelStatus = 'WAITING';";
+    $prep = bdd::$monPdo->prepare($req);
+    $prep->bindValue(':status', $status, PDO::PARAM_STR);
+    $prep->bindValue(':uuid', $uuid, PDO::PARAM_STR);
+    $prep->execute();
+}
+
+public function existingDuel($uuid) {
+    $q = "SELECT uuid FROM `duel` WHERE user2Uuid IS NULL AND duelStatus = 'WAITING' AND user1Uuid != :uuid";
+        $prep = bdd::$monPdo->prepare($q);
+        $prep->bindValue(':uuid', $uuid, PDO::PARAM_STR);
+        $prep->execute();
+        $existingDuel = $prep->fetch(PDO::FETCH_ASSOC);
+    return $existingDuel;
+}
+
+public function joinDuel($uuid, $duelUuid) {
+    include_once "utils.php";
+    $req = "UPDATE duel SET duelStatus = :status, user2Uuid = :uuid WHERE uuid = :duelUuid AND user2Uuid IS NULL AND duelStatus = 'WAITING';";
+    $prep = bdd::$monPdo->prepare($req);
+    $prep->bindValue(':status', "PLAYING", PDO::PARAM_STR);
+    $prep->bindValue(':uuid', $uuid, PDO::PARAM_STR);
+    $prep->bindValue(':duelUuid', $duelUuid, PDO::PARAM_STR);
+    $prep->execute();
+}
+
+
 //
 
 
