@@ -132,14 +132,41 @@ public function sendComment($profileUuid, $userUuid, $message) {
 
 //--- FRIENDS SYSTEM ---//
 
-//Add friend
-public function addFriend($user1Id, $user2Id) {
-    $req = "INSERT INTO `friends` (`user1`, `user2`) VALUES (:user1Id, :user2Id)";
-    $prep = bdd::$monPdo->prepare($req);
-    $prep->bindValue(':user1Id', $user1Id, PDO::PARAM_STR);
-    $prep->bindValue(':user2Id', $user2Id, PDO::PARAM_STR);
+//Check if request exists
+public function checkFriendRequestExist($sender, $reciever){
+    $sql = "SELECT * FROM friend_request WHERE sender = :sender AND receiver = :receiver";
+    $prep = bdd::$monPdo ->prepare($sql);
+    $prep->BindValue(':sender', $sender, PDO::PARAM_STR);
+    $prep->BindValue(':reciever', $reciever, PDO::PARAM_STR);
+}
+
+//New friend request
+public function newFriendRequest($sender, $reciever){
+    $sql = "INSERT INTO friend_request (sender, receiver) VALUES (:sender, :receiver)";
+    $prep = bdd::$monPdo->prepare($sql);
+    $prep->bindValue(':sender',$sender, PDO::PARAM_STR);
+    $prep->bindValue(':reciever', $reciever, PDO::PARAM_STR);
     $prep->execute();
 }
+
+//Reject friend request
+public function rejectFriendRequest($id) {
+    $sql = "DELETE FROM friend_request WHERE id = :id";;
+    $prep = bdd::$monPdo->prepare($sql);
+    $prep->bindValue(':id', $id, PDO::PARAM_STR);
+    $prep->execute();
+}
+
+//Add friend
+public function addFriend($user1, $user2) {
+    $sql = "INSERT INTO friends_list (user1, user2) VALUES (:user1, :user2)";
+    $prep = bdd::$monPdo->prepare($sql);
+    $prep->bindValue(':user1', $user1, PDO::PARAM_STR);
+    $prep->bindValue(':user2', $user2, PDO::PARAM_STR);
+    $prep->execute();
+}
+
+
 
 
 
