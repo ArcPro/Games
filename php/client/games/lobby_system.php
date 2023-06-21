@@ -9,18 +9,16 @@ if (isset($_GET["remove"])) {
     updateGame($_SESSION["uuid"], "CANCELED");
     echo "<script>window.location.href = 'http://localhost/ArcPro/chess/';</script>";
 }
-if (empty($gameStatus) || $gameStatus["duelStatus"] == NULL || $gameStatus["duelStatus"] == "CANCELED") {
-    if (!checkExistingGames($_SESSION["uuid"])) {
+// print_r($gameStatus);
+
+if (empty($gameStatus) || $gameStatus["duelStatus"] == NULL || $gameStatus["duelStatus"] == "CANCELED") { // Si on a aucune partie en cours
+    if (!checkExistingGames($_SESSION["uuid"])) { // Si aucune partie n'attend de joueur
         createGame($_SESSION["uuid"]);
         include "create_game.php";
     } else { // Join game
         joinGame($_SESSION["uuid"], checkExistingGames($_SESSION["uuid"])["uuid"]);
     }
-    // if (!checkExistingGames()) {
-    //     createGame($_SESSION["uuid"]);
-    // } else {
 
-    // }
 } else {
     if ($gameStatus["duelStatus"] == "WAITING") {
         include "create_game.php";
@@ -36,6 +34,8 @@ if (empty($gameStatus) || $gameStatus["duelStatus"] == NULL || $gameStatus["duel
         echo "<script>document.getElementById('createGame').innerText = 'Annuler la partie';
         document.getElementById('createGame').onclick = removeGame;
         document.getElementById('gameDisplay').innerText = '".$diff->format("%I minutes %S secondes")."'";
+    } else {
+        include "game_system.php";
     }
 }
 

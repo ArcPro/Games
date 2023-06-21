@@ -25,7 +25,7 @@ class User {
 }
 
     //profile/
-    class Profile {
+class Profile {
 
     //attributs profil
     public $uuid;
@@ -44,6 +44,30 @@ class User {
         $this-> avatar = $avatar;
         $this-> nbDuelJoue = $nbDuelJoue;
         $this-> nbDuelGagne = $nbDuelGagne;
+
+    }
+
+}
+
+class Duel {
+
+    //attributs profil
+    public $uuid;
+    public $user1;
+    public $user2;
+    public $status;
+    public $winner;
+    public $infos;
+    public $date;
+
+    public function __construct($uuid, $user1, $user2, $status, $winner, $infos, $date){
+        $this-> uuid = $uuid;
+        $this-> user1 = $user1;
+        $this-> user2 = $user2;
+        $this-> status = $status;
+        $this-> winner = $winner;
+        $this-> infos = $infos;
+        $this-> date = $date;
 
     }
 

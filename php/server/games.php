@@ -28,6 +28,11 @@ function joinGame($uuid, $duelUuid) {
     $pdo->joinDuel($uuid, $duelUuid);
 }
 
+// GAME SYSTEM
+function getDuelInfos($uuid) {
+    global $pdo;
+    return $pdo->getDuelInformations($uuid);
+}
 
 // createGame($uuid) {
 

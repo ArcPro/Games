@@ -108,12 +108,13 @@ public function getProfile($uuid)
         $prep->execute();
         $globalUserInfos = $prep->fetch(PDO::FETCH_ASSOC);
 
-    $q = "SELECT count(*) as nbDuel FROM `duel` WHERE user1Uuid = :uuid OR user2Uuid = :uuid";
+    $q = "SELECT count(*) as nbDuel FROM `duel` WHERE (user1Uuid = :uuid OR user2Uuid = :uuid) AND duelStatus = :duelStatus";
         $prep = bdd::$monPdo->prepare($q);
         $prep->bindValue(':uuid', $uuid, PDO::PARAM_STR);
+        $prep->bindValue(':duelStatus', "ENDED", PDO::PARAM_STR);
         $prep->execute();
         $nbDuel = $prep->fetch(PDO::FETCH_ASSOC);
-    $q = "SELECT count(*) as nbWin FROM `duel` WHERE user1Uuid = :uuid OR user2Uuid = :uuid AND winnerUuid = :uuid";
+    $q = "SELECT count(*) as nbWin FROM `duel` WHERE winnerUuid = :uuid";
         $prep = bdd::$monPdo->prepare($q);
         $prep->bindValue(':uuid', $uuid, PDO::PARAM_STR);
         $prep->execute();
@@ -170,7 +171,7 @@ public function addFriend($user1, $user2) {
 
 
 
-//--- GAME SYSTEM ---//
+//--- PARTY SYSTEM ---//
 
 public function verifGameStatus($uuid) {
     $q = "SELECT user1Uuid, user2Uuid, duelStatus, winnerUuid, date FROM `duel` WHERE user1Uuid = :uuid OR user2Uuid = :uuid ORDER BY date desc";
@@ -201,7 +202,7 @@ public function changeDuelStatus($uuid, $status) {
 }
 
 public function existingDuel($uuid) {
-    $q = "SELECT uuid FROM `duel` WHERE user2Uuid IS NULL AND duelStatus = 'WAITING' AND user1Uuid != :uuid";
+    $q = "SELECT uuid FROM `duel` WHERE duelStatus = 'WAITING' AND user1Uuid != :uuid ORDER BY date ASC";
         $prep = bdd::$monPdo->prepare($q);
         $prep->bindValue(':uuid', $uuid, PDO::PARAM_STR);
         $prep->execute();
@@ -211,7 +212,7 @@ public function existingDuel($uuid) {
 
 public function joinDuel($uuid, $duelUuid) {
     include_once "utils.php";
-    $req = "UPDATE duel SET duelStatus = :status, user2Uuid = :uuid WHERE uuid = :duelUuid AND user2Uuid IS NULL AND duelStatus = 'WAITING';";
+    $req = "UPDATE duel SET duelStatus = :status, user2Uuid = :uuid WHERE uuid = :duelUuid AND duelStatus = 'WAITING';";
     $prep = bdd::$monPdo->prepare($req);
     $prep->bindValue(':status', "PLAYING", PDO::PARAM_STR);
     $prep->bindValue(':uuid', $uuid, PDO::PARAM_STR);
@@ -219,8 +220,18 @@ public function joinDuel($uuid, $duelUuid) {
     $prep->execute();
 }
 
+public function getDuelInformations($uuid) {
+    $q = "SELECT uuid, user1Uuid, user2Uuid, duelStatus, winnerUuid, duelStats, date FROM `duel` WHERE user1Uuid = :uuid OR user2Uuid = :uuid ORDER BY date DESC LIMIT 1";
+    $prep = bdd::$monPdo->prepare($q);
+    $prep->bindValue(':uuid', $uuid, PDO::PARAM_STR);
+    $prep->execute();
+    $result = $prep->fetch(PDO::FETCH_ASSOC);
+    return new Duel($result["uuid"], $result["user1Uuid"], $result["user2Uuid"], $result["duelStatus"], $result["winnerUuid"], $result["duelStats"], $result["date"]);
+}
 
-//
+// GAME SYSTEM
+
+
 
 
 
