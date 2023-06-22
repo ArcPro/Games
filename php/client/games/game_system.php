@@ -5,4 +5,8 @@ var_dump($duel);
 
 if ($duel->status == "PLAYING") {
     echo($duel->infos);
+    
 }
+
+
+function getChessBoard($duel) {}
